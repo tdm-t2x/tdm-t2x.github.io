@@ -25,7 +25,7 @@
   <h1><strong>Learning Few-Step Diffusion Models by Trajectory Distribution Matching
   </strong>&nbsp;&nbsp;</h1>
   <p id="authors" class="serif">
-    <a href="https://scholar.google.com/citations?user=9VfuwdsAAAAJ&hl=zh-CN&oi=ao">Yihong Luo<sup>1,2<dag></sup></a>
+    <a href="https://scholar.google.com/citations?user=9VfuwdsAAAAJ&hl=zh-CN&oi=ao">Yihong Luo<sup>1<dag></sup></a>
     <a href="https://hu-tianyang.github.io">Tianyang Hu<sup>2</sup></a>
     <a href="https://openreview.net/profile?id=~Jiacheng_Sun1">Jiacheng Sun<sup>2</sup></a>
     <a href="https://vanoracai.github.io/">Yujun Cai<sup>3</sup></a> 
@@ -46,9 +46,9 @@
 
   <font size="+1">
     <p style="text-align: center;" class="serif">
-      <a href="https://www.arxiv.org/abs/2403.12931" target="_blank" style="font-weight: bold;">[Paper]</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <!-- <a href="https://www.arxiv.org/abs/2403.12931" target="_blank"  style="font-weight: bold;">[Paper]</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
       <a href="https://github.com/Luo-Yihong/TDM" target="_blank" style="font-weight: bold;">[Github]</a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="#bibtex" style="font-weight: bold;">[BibTeX]</a>
+      <!-- <a href="#bibtex" style="font-weight: bold;">[BibTeX]</a> -->
     </p><br>
   </font>
 
@@ -99,7 +99,7 @@ In particular, our method distills PixArt-\(\alpha\) into a 4-step generator tha
   <details style="margin-top: 15px;">
     <summary class="serif"style="color: #1E88E5; cursor: pointer; font-size: 1.2em; outline: none" >Click for answer</summary>
     <p style="font-size: 1.2em; margin-top: 8px;" class="serif">
-      Answers of TDM's position: (left to right): bottom, bottom, top, bottom, top.
+      Answers of TDM's position (left to right): bottom, bottom, top, bottom, top.
     </p>
   </details>
 </div>
@@ -140,17 +140,22 @@ details[open] summary::before {
 <div class="content">
   <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Methodology</p>
   <p style="font-size: 1.2em" class="serif">
-    Our approach combines diffusion processes with GANs, bridging the gap between the two models and leveraging the distinct advantages of each: it can be versatile for various downstream tasks while also boasting the advantage of rapid generation. To address the typical instability in GAN training, we do not directly use real data as ground truth for training. Specifically, we believe that the quality of images denoised by generator from highly-noised images will be lower than that from lowly-noised images. Therefore, we use the former as the fake images for GAN training and the latter as the real images. This design significantly stabilizes our GAN training process, and since the training is still defined on clean samples, it successfully acquires the ability to perform one-step generation.
+    Our TDM builds non-trival connection between trajectory distillation and distribution matching, deilivering a new distillation paradigm: Trajectory Distribution Matching.     
+    TDM combines the strengths of distribution and trajectory matching. Our method introduces a data-free score distillation objective, aligning the student's trajectory with the teacher's at the distribution level. 
+
+    <br>
 
     Benefiting from the proposed design, our method possesses the following advantages: <br>
     <br>
-    1. A stable training process, <br>
-    2. Extremely fast high-quality one-step generation, <br>
-    3. Broad prospects for application in various downstream tasks.
+    1) Supporting various ODE samplers for both training and inference, <br>
+
+    2) A ultra fast training process, <br>
+
+    3)  Extremely fast high-quality few-step generation: TDM can suparrs the teacher without extra high-quality data in real user preference!
   </p>
   
   <!-- <img class="summary-img" src="figs/framework-final-new-0523.pdf" style="width:100%;"> -->
-  <img class="summary-img" src="figs/yoso_frame_final.png" style="width:100%;">
+  <img class="summary-img" src="figs/frame.jpg" style="width:100%;">
   
 </div>
 
@@ -169,72 +174,15 @@ details[open] summary::before {
   <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Real User Preference</p>
   <p style="font-size: 1.2em" class="serif">
     To further verify the effectiveness of our proposed method, we conduct an extensive user study across different backbones. 
-    The results are shown in below: Our method clearly outperforms the teacher diffusion and other most competing methods.
+    The results are shown in below: Our method clearly outperforms the teacher diffusion and other most competing methods in a image-free way.
   </p>
   <img class="summary-img" src="figs/user_preference.jpg" style="width:100%;"> 
 </div>
 
 
-<div class="content">
-  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">The Effect of Quick-Adaption</p>
-  <div style="display: flex;">
-    <div style="width:50%; padding: 5px;">
-      <img class="summary-img" src="figs/wo_quick_adaption.png" style="width:100%;">
-      <p style="text-align: center;" class="serif"> (1) w/o quick adaption. </p>
-    </div>
-    <div style="width:50%; padding: 5px;">
-      <img class="summary-img" src="figs/quick_adaption.png" style="width:100%;">
-      <p style="text-align: center;" class="serif"> (2) w/ quick adaption. </p>
-    </div>
-    
-  </div>
-  <p style="font-size:1.2em" class="serif">One-step generated images by YOSO-PixArt-\(\alpha\) trained with only 5k iterations under different configurations from the same initial noise and prompt.</p>
-  
-</div>
-
-<div class="content">
-  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Gallery</p>
-  <p style="font-size: 1.2em" class="serif">
-
-  </p>
-  <p style="font-size:1.2em" class="serif">Model: DreamShaper</p>
-  
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/dreamshaper-2steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif"> (1) 2 steps. </p>
-  </div>
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/dreamshaper-4steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif">(2)4 steps. </p>
-  </div>
-
-  <p style="font-size:1.2em" class="serif">Model: ICBINP</p>
-  
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/ICBINP-2steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif"> (1) 2 steps. </p>
-  </div>
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/ICBINP-4steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif"> (2) 4 steps. </p>
-  </div>
-  
-  <p style="font-size:1.2em" class="serif">Model: Realistic</p>
-  
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/realistic-2steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif"> (1) 2 steps. </p>
-  </div>
-  <div style="width:100%; padding: 5px;">
-    <img class="summary-img" src="figs/yoso_gallery/realistic-4steps.jpg" style="width:100%;">
-    <p style="text-align: center;" class="serif"> (2) 4 steps. </p>
-  </div>
-
-</div>
-
 <!-- </div> -->
 
-<div class="content" id="bibtex">
+<!-- <div class="content" id="bibtex">
   <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">BibTeX</p>
   <code> @misc{luo2024sample,<br>
   &nbsp;&nbsp;title={You Only Sample Once: Taming One-Step Text-to-Image Synthesis by Self-Cooperative Diffusion GANs},<br>
@@ -244,7 +192,7 @@ details[open] summary::before {
   &nbsp;&nbsp;archivePrefix={arXiv},<br>
   &nbsp;&nbsp;primaryClass={cs.CV}<br>
   } </code> 
-</div>
+</div> -->
 
 <div class="content">
   <p class="serif">
