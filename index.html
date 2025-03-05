@@ -146,7 +146,7 @@ details[open] summary::before {
 
     2)  Ultra fast training, <br>
 
-    3)  Extremely high-quality few-step generation: TDM can suparrs the teacher without extra high-quality data in real user preference!
+    3)  Extremely high-quality few-step generation: TDM can surpass the teacher without extra high-quality data in real user preference!
   </p>
   
   <!-- <img class="summary-img" src="figs/framework-final-new-0523.pdf" style="width:100%;"> -->
@@ -172,6 +172,15 @@ details[open] summary::before {
     The results are shown in below: Our method clearly outperforms the teacher diffusion and other most competing methods in a image-free way.
   </p>
   <img class="summary-img" src="figs/user_preference.jpg" style="width:100%;"> 
+</div>
+
+<div class="content">
+  <p style="text-align:left; font-size: 2em; font-weight: bold" class="serif">Text-to-Video Acceleration</p>
+  <p style="font-size: 1.2em" class="serif">
+    Our TDM can be extended to text-to-video acceleration, benefiting from its quick convergence and data-free property.
+    We distill our 4-step TDM from CogVideoX-2B. We evaluate our method on the widely used VBench. Results in below show that TDM surpasses the teacher CogVideoX-2B by a notable margin while being around 25 times faster.
+  </p>
+  <img class="summary-img" src="figs/t2v_vbench.png" style="width:100%;"> 
 </div>
 
 
